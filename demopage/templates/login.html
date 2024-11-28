@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #E6F4EA;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            width: 100vw;
+        }
+
+        .form-section {
+            flex: 1;
+            padding: 40px;
+            background: linear-gradient(to right, #A7D7C5, #81C784, #C8E6C9);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .main-heading {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 30px;
+            color: #054C33;
+        }
+
+        .login-container {
+            width: 100%;
+        }
+
+        .login-container input {
+            margin-bottom: 15px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #81C784;
+            color: white;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .login-container input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .login-container input:focus {
+            background-color: #A7D7C5;
+            outline: none;
+            transform: scale(1.02);
+        }
+
+        .btn {
+            padding: 12px;
+            background-color: #054C33;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: #2B9348;
+        }
+
+        .image-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+        }
+
+        .image-section img {
+            max-width: 90%;
+            height: auto;
+        }
+
+        footer {
+            text-align: center;
+            color: #054C33;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            color: #2B9348;
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .errorlist {
+            color: #2B9348;
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 10px;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #ffffff;
+        }
+
+        .register-link a {
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section">
+            <img src="https://img.freepik.com/free-vector/drug-allergy-abstract-concept-vector-illustration-triggers-drug-allergies-risk-factors-medicine-side-effect-remedy-intolerance-test-allergic-disease-symptom-treatment-abstract-metaphor_335657-4067.jpg?t=st=1729458960~exp=1729462560~hmac=abab4edbe231c0834439079568ab72bec578b515f818a34429acab80f79170d4&w=740" alt="Login illustration">
+        </div>
+        <div class="form-section">
+            <h1 class="main-heading">Welcome to Skin Disease Diagnosis Login Page!</h1>
+            <div class="login-container">
+                <h2>Login</h2><br>
+
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                {% if msg %}
+                    <p class="error-message">{{ msg }}</p>
+                {% endif %}
+                <p class="register-link">New here? <a href="{% url 'signup' %}">Click here for registration</a></p>
+            </div>
+            <footer>
+                <p>&copy; Login page by Team1</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

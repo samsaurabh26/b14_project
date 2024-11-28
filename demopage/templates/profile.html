@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Disease Diagnosis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #E6F4EA;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            padding: 20px;
+            background-color: #A7D7C5;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            text-align: center;
+            color: #054C33;
+        }
+        .image-container {
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background-color: #D8F3DC;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .message {
+            color: #2B9348;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Skin Disease Diagnosis</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="uploaded_image" accept="image/*" required>
+            <input type="submit" value="Upload">
+        </form>
+
+        {% if uploaded_image_url %}
+            <h3>Original Uploaded Image:</h3>
+            <div class="image-container">
+                <img src="{{ uploaded_image_url }}" alt="Original Image">
+            </div>
+        {% endif %}
+
+        {% if processed_image_url %}
+            <h3>Processed Image with Detected Skin Defects:</h3>
+            <div class="image-container">
+                <img src="{{ processed_image_url }}" alt="Processed Image">
+            </div>
+
+            <h4>Detected Areas:</h4>
+            <ul>
+                {% for area in areas_info %}
+                    <li>{{ area }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if error_message %}
+            <div class="message">{{ error_message }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
